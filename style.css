@@ -63,15 +63,15 @@ li {
 /*  Party view */
 #conservative, #labour, #libdem { padding: 10px; }
 #conservative {
-    background: rgb(230, 58, 141);
+    background: rgba(230, 58, 141, 0.6);
     top: 110px;
 }
 #labour {
-    background: rgb(35, 156, 163);
+    background: rgba(35, 156, 163, 0.6);
     top: 330px;
 }
 #libdem {
-    background: rgb(169, 101, 11);
+    background: rgba(169, 101, 11, 0.6);
     top: 550px;
 }
 
