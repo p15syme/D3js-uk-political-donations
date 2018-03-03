@@ -271,25 +271,25 @@ function moveToDonations(alpha) {
 	return function(d) {
 			var centreX;
 			var centreY;
-			if (d.value <= 100000) {
-				centreY = 700;
-				centreX = 300;
+			if (d.value > 1000000) {
+				centreY = 650;
+				centreX = 350;
 				
-			} else if (d.value <= 500000) {
-				centreY = 600;
-				centreX = 750;
+			} else if (d.value < 10000000 && d.value >= 5000000) {
+				centreY = 550;
+				centreX = 800;
 				
-			} else if (d.value <= 1000000) {
-				centreY = 500;
-				centreX = 300;
+			} else if (d.value < 5000000 && d.value >= 1000000) {
+				centreY = 450;
+				centreX = 350;
 				
-			} else  if (d.value <= 5000000) {
-				centreY = 400;
-				centreX = 750;
+			} else  if (d.value < 1000000 && d.value >= 100000) {
+				centreY = 350;
+				centreX = 800;
 				
 			} else  if (d.value <= maxVal) {
-				centreY = 300;
-				centreX = 300;
+				centreY = 250;
+				centreX = 350;
 			}
 
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
