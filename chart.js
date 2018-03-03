@@ -277,24 +277,24 @@ function moveToDonations(alpha) {
 			var centreX;
 			var centreY;
 			if (d.value > 1000000) {
-				centreY = 600;
+				centreY = 500;
 				centreX = 300;
 				
 			} else if (d.value < 10000000 && d.value >= 5000000) {
-				centreY = 500;
+				centreY = 400;
 				centreX = 700;
 				
 			} else if (d.value < 5000000 && d.value >= 1000000) {
-				centreY = 400;
+				centreY = 300;
 				centreX = 300;
 				
 			} else  if (d.value < 1000000 && d.value >= 100000) {
-				centreY = 300;
+				centreY = 200;
 				centreX = 700;
 				
 			} else  if (d.value <= maxVal) {
-				centreY = 200;
-				centreX = 300;
+				centreY = 150;
+				centreX = 150;
 			}
 
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
