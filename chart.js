@@ -67,7 +67,7 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
-		$("#view-donation-amount").fadeOuy(250);
+		$("#view-donation-amount").fadeOut(250);
 		return donorType();
 	}
 	if (name === "group-by-money-source") {
