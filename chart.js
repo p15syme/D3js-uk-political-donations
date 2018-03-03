@@ -406,7 +406,8 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
-	
+	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(voice);
 	}
 
 function mouseout() {
@@ -414,7 +415,7 @@ function mouseout() {
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);
-
+		window.speechSynthesis.cancel();
 		d3.select(".tooltip")
 			.style("display", "none");
 		}
@@ -427,5 +428,6 @@ $(document).ready(function() {
     return d3.csv("data/7500up.csv", display);
 
 });
+
 
 
