@@ -191,6 +191,21 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     padding: 0;
     border: 0;
 }
+
+.zoomimg {
+    display: inline-block;
+    width: 250px;
+    height: 375px;
+    padding: 0px 5px 0px 5px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: all .5s ease;
+}
+.zoomimg:hover {
+    cursor: pointer;
+    background-size: 150% 150%;
+}
 /*csslint unqualified-attributes:false, outline-none:false*/
 .pure-button {
     font-size: 100%;
