@@ -48,6 +48,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#view-donation-amount").fadeOut(250);
 		return total();
 		//location.reload();
 	}
@@ -57,6 +58,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOut(250);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -65,6 +67,7 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOuy(250);
 		return donorType();
 	}
 	if (name === "group-by-money-source") {
@@ -73,6 +76,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOut(250);
 		return fundsType();
 	}
 	if (name === "group-by-donation-amount")
@@ -80,7 +84,8 @@ function transition(name) {
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeIn(1000);
+		$("#view-source-type").fadeOut(250);
+		$("#view-donation-amount").fadeIn(1000);
 		return donationType();
 	}
 
@@ -272,23 +277,23 @@ function moveToDonations(alpha) {
 			var centreX;
 			var centreY;
 			if (d.value > 1000000) {
-				centreY = 650;
+				centreY = 600;
 				centreX = 350;
 				
 			} else if (d.value < 10000000 && d.value >= 5000000) {
-				centreY = 550;
+				centreY = 500;
 				centreX = 800;
 				
 			} else if (d.value < 5000000 && d.value >= 1000000) {
-				centreY = 450;
+				centreY = 400;
 				centreX = 350;
 				
 			} else  if (d.value < 1000000 && d.value >= 100000) {
-				centreY = 350;
+				centreY = 300;
 				centreX = 800;
 				
 			} else  if (d.value <= maxVal) {
-				centreY = 250;
+				centreY = 200;
 				centreX = 350;
 			}
 
