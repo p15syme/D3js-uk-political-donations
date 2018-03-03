@@ -182,7 +182,7 @@ function types(e) {
 }
 
 function donations(e) {
-	node.each(moveToFunds(e.alpha));
+	node.each(moveToDonations(e.alpha));
 
 
 		node.attr("cx", function(d) { return d.x; })
@@ -264,6 +264,36 @@ function moveToFunds(alpha) {
 		}
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+
+function moveToDonations(alpha) {
+	return function(d) {
+			var centreX;
+			var centreY;
+			if (d.value <= 100000) {
+				centreY = 700;
+				centreX = 300;
+				
+			} else if (d.value <= 500000) {
+				centreY = 600;
+				centreX = 750;
+				
+			} else if (d.value <= 1000000) {
+				centreY = 500;
+				centreX = 300;
+				
+			} else  if (d.value <= 5000000) {
+				centreY = 400;
+				centreX = 750;
+				
+			} else  if (d.value <= maxVal) {
+				centreY = 300;
+				centreX = 300;
+			}
+
+		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
+		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
 	};
 }
 
