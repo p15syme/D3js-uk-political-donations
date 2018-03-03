@@ -409,18 +409,6 @@ function mouseover(d, i) {
 	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
 	window.speechSynthesis.speak(voice);
 
-$(document).ready(function() {
-  var oldSize = parseFloat($("#content").css('font-size'));
-  var newSize = oldSize  * 2;
-  $("#content").hover(
-    function() {
-     $("#content").animate({ fontSize: newSize}, 200);
-    },
-    function() {
-    $("#content").animate({ fontSize: oldSize}, 200);
-   }
- );
-});
 	}
 
 function mouseout() {
