@@ -109,16 +109,16 @@ li {
     width: 370px;
     
 }
-#individual {
+#first {
     top: 55px;
 }
-#company {
+#second {
     top: 390px;
 }
-#union {
+#third
     top: 660px;
 }
-#society {
+#fourth
     top: 205px;
     text-align: right;
     right: 0;
