@@ -103,7 +103,31 @@ li {
 }
 
 /*Donor Amount layout*/
-
+#view-donation-amount {
+    height: 100%;
+    left: 500px;
+    width: 370px;
+    
+}
+#individual {
+    top: 55px;
+}
+#company {
+    top: 390px;
+}
+#union {
+    top: 660px;
+}
+#society {
+    top: 205px;
+    text-align: right;
+    right: 0;
+}
+#other {
+    top: 530px;
+    text-align: right;
+    right: 0
+}
 
 /* Value scale */
 
