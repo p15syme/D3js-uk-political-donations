@@ -278,7 +278,7 @@ function moveToDonations(alpha) {
 			var centreY;
 		if (d.value >= 10000000) {
 			centreY = 700;
-			centreX = 500;
+			centreX = 100;
 				
 		} else if (d.value < 10000000 && d.value>= 1000000) {
 				centreY = 600;
