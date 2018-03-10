@@ -1,10 +1,12 @@
 // GLOBALS
-var w = 1000,h = 900;
+var w = 2000,h = 900;
 var padding = 2;
 var nodes = [];
 var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
+var msg = new SpeechSynthesisUtterance();
+msg.rate = 1.2;
 
 var partyCentres = { 
     con: { x: w / 3, y: h / 3.3}, 
@@ -13,15 +15,23 @@ var partyCentres = {
   };
 
 var entityCentres = { 
-    company: {x: w / 3.65, y: h / 2.3},
-		union: {x: w / 3.65, y: h / 1.8},
-		other: {x: w / 1.15, y: h / 1.9},
-		society: {x: w / 1.12, y: h  / 3.2 },
+    company: {x: w / 2.5, y: h / 2.3},
+		union: {x: w / 2.5, y: h / 1.6},
+		other: {x: w / 1.4, y: h / 1.65},
+		society: {x: w / 1.4, y: h  / 3.2 },
 		pub: {x: w / 1.8, y: h / 2.8},
-		individual: {x: w / 3.65, y: h / 3.3},
+		individual: {x: w / 2.5, y: h / 3.8},
+	};
+var amountCentres = {
+    m1: {x: w / 3.65, y: h / 2.3},
+		k500: {x: w / 3.65, y: h / 1.8},
+		k250: {x: w / 1.15, y: h / 1.9},
+		k100: {x: w / 1.12, y: h  / 3.2 },
+		k50: {x: w / 1.8, y: h / 2.8},
+		k25: {x: w / 3.65, y: h / 3.3},
 	};
 
-var fill = d3.scale.ordinal().range(["#F02233", "#087FBD", "#FDBB30"]);
+var fill = d3.scale.ordinal().range(["#282D4F","#86003C ","#E41F7B "]);
 
 var svgCentre = { 
     x: w / 3.6, y: h / 2
@@ -47,15 +57,17 @@ function transition(name) {
 		$("#value-scale").fadeIn(1000);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
+		$("#view-amount-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		return total();
-		//location.reload();
+		location.reload();
 	}
 	if (name === "group-by-party") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
+		$("#view-amount-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
 		return partyGroup();
 	}
@@ -64,18 +76,30 @@ function transition(name) {
 		$("#value-scale").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
+		$("#view-amount-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
 		return donorType();
 	}
-	if (name === "group-by-money-source")
+	if (name === "group-by-money-source") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#view-amount-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
 		return fundsType();
 	}
-
+    if (name === "group-by-amount") {
+        $("#initial-content").fadeOut(250);
+		$("#value-scale").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
+		$("#view-party-type").fadeOut(250);
+		$("#view-source-type").fadeOut(1000);
+		$("#view-amount-type").fadeIn(1000);
+        return amountType();
+    }
+}
+    
 function start() {
 
 	node = nodeGroup.selectAll("circle")
@@ -92,7 +116,8 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
+		.on("mouseout", mouseout)
+        .on("click",googleSearch);
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
@@ -142,6 +167,14 @@ function fundsType() {
 		.start();
 }
 
+function amountType() {
+    force.gravity(0)
+		.friction(0.75)
+		.charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
+		.on("tick", amounts)
+		.start();
+}
+
 function parties(e) {
 	node.each(moveToParties(e.alpha));
 
@@ -172,6 +205,14 @@ function all(e) {
 			.attr("cy", function(d) {return d.y; });
 }
 
+function amounts(e) {
+    node.each(moveToAmounts(e.alpha));
+
+
+		node.attr("cx", function(d) { return d.x; })
+			.attr("cy", function(d) {return d.y; });
+}
+
 
 function moveToCentre(alpha) {
 	return function(d) {
@@ -190,6 +231,7 @@ function moveToCentre(alpha) {
 				centreY = svgCentre.y - 25;
 			} else {
 				centreY = svgCentre.y;
+
 			}
 
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
@@ -199,9 +241,9 @@ function moveToCentre(alpha) {
 
 function moveToParties(alpha) {
 	return function(d) {
-		var centreX = partyCentres[d.party].x + 50;
+		var centreX = partyCentres[d.party].x;
 		if (d.entity === 'pub') {
-			centreX = 1200;
+			centreX = -1000;
 		} else {
 			centreY = partyCentres[d.party].y;
 		}
@@ -215,9 +257,9 @@ function moveToEnts(alpha) {
 	return function(d) {
 		var centreY = entityCentres[d.entity].y;
 		if (d.entity === 'pub') {
-			centreX = 1200;
+			centreX = -1200;
 		} else {
-			centreX = entityCentres[d.entity].x;
+			centreX = entityCentres[d.entity].x-270;
 		}
 
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
@@ -231,13 +273,40 @@ function moveToFunds(alpha) {
 		var centreX = entityCentres[d.entity].x;
 		if (d.entity !== 'pub') {
 			centreY = 300;
-			centreX = 350;
+			centreX = 825;
 		} else {
-			centreX = entityCentres[d.entity].x + 60;
+			centreX = entityCentres[d.entity].x;
 			centreY = 380;
 		}
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+
+function moveToAmounts(alpha) {
+	return function(d) {
+		var centreX = svgCentre.x + 75;
+			if (d.value <= 25001) {
+				centreY = svgCentre.y + 300;
+                centreX = svgCentre.x + 550;
+			} else if (d.value <= 50001) {
+				centreY = svgCentre.y + 300;
+			} else if (d.value <= 100001) {
+				centreY = svgCentre.y + 110;
+                centreX = svgCentre.x + 535;
+			} else  if (d.value <= 500001) {
+				centreY = svgCentre.y + 50;
+			} else  if (d.value <= 1000001) {
+				centreY = svgCentre.y - 100;
+                centreX = svgCentre.x + 535;
+			} else  if (d.value <= maxVal) {
+				centreY = svgCentre.y - 130;
+			} else {
+				centreY = svgCentre.y;
+			}
+
+		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
+		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
 	};
 }
 
@@ -315,7 +384,8 @@ function mouseover(d, i) {
 	var party = d.partyLabel;
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
-	
+    msg.text = donor.concat(amount);
+    window.speechSynthesis.speak(msg);
 
 
 	// image url that want to check
@@ -356,10 +426,20 @@ function mouseout() {
 
 		d3.select(".tooltip")
 			.style("display", "none");
+        window.speechSynthesis.cancel();
 		}
+
+function googleSearch(d,i){
+    var mosie = d3.select(this);
+    var donor = d.donor;
+    var url ='http://www.google.com/search?q=' + donor;
+    window.open(url,'_blank');
+}
 
 $(document).ready(function() {
 		d3.selectAll(".switch").on("click", function(d) {
+            var buttonClick = document.getElementById('buttonClick');
+            buttonClick.play();
       var id = d3.select(this).attr("id");
       return transition(id);
     });
