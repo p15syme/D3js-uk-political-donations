@@ -419,9 +419,16 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
-	
-	}
+	var newElem = document.createElement("img");
+    newElem.setAttribute("src","http://www.bizreport.com/2011/02/03/android-logo-200x200.jpg");
+    newElem.setAttribute("height","42");
+    newElem.setAttribute("width","42");
+    newElem.setAttribute("onerror",'this.src=\"https://github.com/favicon.ico\";');
+    document.getElementById("pictureReel").insertBefore(newElem,document.getElementById("pictureReel").firstChild);
+    newElem.src = imageFile;
 
+}
+    
 function mouseout() {
 	// no more tooltips
 		var mosie = d3.select(this);
