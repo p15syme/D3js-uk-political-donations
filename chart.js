@@ -414,9 +414,9 @@ function mouseover(d, i) {
     infoPic.setAttribute("src","https://upload.wikimedia.org/wikipedia/en/d/d2/Sublime_Text_3_logo.png");
     infoPic.setAttribute("height","42");
     infoPic.setAttribute("width","42");
-    infoPic.setAttribute("onerror",'this.src=\"https://avatars2.githubusercontent.com/u/22681573?s=400&v=4;');
+    infoPic.setAttribute("onerror",'this.src=\"https://avatars2.githubusercontent.com/u/22681573?s=400&v=4";');
     document.getElementById("historyPic").insertBefore(infoPic,document.getElementById("historyPic").firstChild);
-    newElem.src = imageFile;
+    infoPic.src = imageFile;
 
 	}
 
