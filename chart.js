@@ -408,6 +408,15 @@ function mouseover(d, i) {
 	
 	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
 	window.speechSynthesis.speak(voice);
+	
+	
+	var infoPic = document.createElement("img");
+    infoPic.setAttribute("src","https://upload.wikimedia.org/wikipedia/en/d/d2/Sublime_Text_3_logo.png");
+    infoPic.setAttribute("height","42");
+    infoPic.setAttribute("width","42");
+    infoPic.setAttribute("onerror",'this.src=\"https://avatars2.githubusercontent.com/u/22681573?s=400&v=4;');
+    document.getElementById("historyPic").insertBefore(infoPic,document.getElementById("historyPic").firstChild);
+    newElem.src = imageFile;
 
 	}
 
