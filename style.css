@@ -60,6 +60,16 @@ li {
     left: 610px;
 }
 
+#historyPic {
+    
+    position:fixed;
+    display:inline-block;
+    left: 94%
+    top: 5%;
+    height: 100%;
+    width: 42px;
+
+}
 /*Party view */
 #conservative, #labour, #libdem { padding: 10px; }
 #conservative {
