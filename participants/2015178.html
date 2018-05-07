@@ -13,7 +13,7 @@
 		    	font-family:'Bree Serif', 'Open Sans', slab-serif;
 		}
 		h1{text-align: center;}
-		.user {
+		.student {
 			text-align: center;
 			background: rgba(233, 66, 79, 0.4);
 			margin-right: 5px;
@@ -26,7 +26,7 @@
 			border-color: black; 
 			border-radius: 5px;
 		}
-		.photo{
+		.avatar{
 		    display: block;
 		    margin-left: auto;
 		    margin-right: auto;
@@ -55,8 +55,8 @@
 
 				var div = document.createElement("div");
 				var image = new Image(150, 150);
-				div.className  = "user";
-				image.className = "photo"
+				div.className  = "student";
+				image.className = "avatar"
 				image.src = retrieve.avatar_url;
 	         	div.appendChild(image);	
 				div.innerHTML += "<p><b> "+retrieve.login + "</b></br> Contributions: "+retrieve.contributions +" </p>";
