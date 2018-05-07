@@ -9,13 +9,13 @@
 	<div id = "mydiv"></div>
 	<style type="text/css">
 		body {
-			background: rgba(79, 66, 246);
+			background: rgba(79, 66, 246, 0.2);
 		    	font-family:'Bree Serif', 'Open Sans', slab-serif;
 		}
 		h1{text-align: center;}
 		.student {
 			text-align: center;
-			background: rgba(233, 66, 79, 0.4);
+			background: rgba(233, 66, 79, 0.3);
 			margin-right: 5px;
 			margin-bottom: 5px;
 			width: 200px;
@@ -34,25 +34,18 @@
 	</style>
 
 	<script type="text/javascript">
-
 		function start(){
 			
 			var url  = "https://api.github.com/repos/ioniodi/D3js-uk-political-donations/contributors?per_page=200";
-
 			var req = new XMLHttpRequest();
-
 			req.open("get", url, false);
 			req.send();
-
 			var retrieve = JSON.parse(req.responseText); 
 			console.log(retrieve);
-
 			for (var i =0;i<retrieve.length;i++){
 				append(retrieve[i]);
 			}
-
 			function append(retrieve) {
-
 				var div = document.createElement("div");
 				var image = new Image(150, 150);
 				div.className  = "student";
@@ -64,7 +57,6 @@
 				
 			}
 		}
-
 		window.onload = start();
 	</script>
 
