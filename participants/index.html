@@ -246,13 +246,13 @@
   
   <script>
   // Wrap every letter in a span
-  $('.ml1 .letters').each(function(){
+  $('.ml1 .line').each(function(){
     $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
   });
    
    anime.timeline({loop: true}) 
     .add({
-    targets: '.ml1 .letters',
+    targets: '.ml1 .line',
     scale: [0,1],
     opacity: [0,1],
     easing: "easeInElastic",
@@ -261,7 +261,7 @@
       return 1000 * (i+2);
     }
   }).add({
-    targets: '.ml1',
+    targets: '.ml1 .line',
     opacity: 0,
     duration: 2250,
     easing: "easeInCubic",
